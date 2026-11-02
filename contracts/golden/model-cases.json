@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "scalars": [
+    {
+      "kind": "BOOLEAN",
+      "canonical": "true"
+    },
+    {
+      "kind": "STRING",
+      "canonical": "quoted \"pump\""
+    },
+    {
+      "kind": "INTEGER",
+      "canonical": "9007199254740993"
+    },
+    {
+      "kind": "REAL",
+      "canonical": "0.123456789012345678901"
+    }
+  ],
+  "conflict": {
+    "id": "conflict-flow",
+    "originChangeId": "B1",
+    "target": {
+      "elementId": "pump-1",
+      "attributeId": "flow-1"
+    },
+    "kind": "VALUE",
+    "base": {
+      "revisionId": "R0",
+      "actor": "system",
+      "value": {
+        "typeName": "ScalarValues::Real",
+        "expression": "10",
+        "scalar": {
+          "kind": "REAL",
+          "canonical": "10"
+        }
+      }
+    },
+    "incoming": {
+      "revisionId": "R1",
+      "actor": "Alice",
+      "value": {
+        "typeName": "ScalarValues::Real",
+        "expression": "12",
+        "scalar": {
+          "kind": "REAL",
+          "canonical": "12"
+        }
+      }
+    },
+    "local": {
+      "revisionId": "B1-r1",
+      "actor": "Bob",
+      "value": {
+        "typeName": "ScalarValues::Real",
+        "expression": "15",
+        "scalar": {
+          "kind": "REAL",
+          "canonical": "15"
+        }
+      }
+    }
+  },
+  "inheritedChange": {
+    "changeId": "B2",
+    "revisionId": "B2-r1",
+    "parentRevisionId": "B1-r1",
+    "actor": "Bob",
+    "description": "Add alert",
+    "edits": [
+      {
+        "kind": "ADD_ATTRIBUTE",
+        "documentId": "model.sysml",
+        "target": {
+          "elementId": "pump-1",
+          "attributeId": "alert-1"
+        },
+        "attributeName": "alertEnabled",
+        "before": null,
+        "after": {
+          "typeName": "ScalarValues::Boolean",
+          "expression": "true",
+          "scalar": {
+            "kind": "BOOLEAN",
+            "canonical": "true"
+          }
+        }
+      }
+    ],
+    "sourcePatches": [],
+    "conflicts": [],
+    "inheritedConflictIds": [
+      "conflict-flow"
+    ],
+    "resolutions": []
+  },
+  "readOnlyExpression": {
+    "id": "derived-1",
+    "ownerId": "pump-1",
+    "name": "derivedFlow",
+    "value": {
+      "typeName": null,
+      "expression": "unknownFunction(flowRate)",
+      "scalar": null
+    },
+    "valueRange": {
+      "start": 4,
+      "end": 29
+    },
+    "editable": false,
+    "readOnlyReason": "Unresolved or unsupported expression",
+    "declaredBy": null,
+    "definitionAttributeId": null,
+    "inherited": false
+  }
+}

@@ -1,0 +1,17 @@
+version: '3'
+tasks:
+  default:
+    desc: List change-engine tasks
+    cmds: ['task --list']
+  run:
+    desc: Run the pure change-engine regression suite
+    cmds: ['mvn test']
+  test:
+    desc: Test comparison and replay rules
+    cmds: ['mvn test']
+  build:
+    desc: Build the change-engine library
+    cmds: ['mvn package']
+  clear:
+    desc: Remove generated Maven build outputs
+    cmds: ['mvn clean']

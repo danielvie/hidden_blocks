@@ -1,0 +1,20 @@
+version: '3'
+tasks:
+  default:
+    desc: List available tasks
+    cmds: [task --list]
+  run:
+    desc: Run the editor with the backend API proxy
+    cmds: [npm run dev]
+  build:
+    desc: Compile Rust WASM and build the browser editor
+    cmds: [npm run build]
+  test:
+    desc: Run frontend and Rust regressions
+    cmds: [npm test]
+  test:e2e:
+    desc: Run browser checks against an isolated E2E_BASE_URL service
+    cmds: [npm run test:e2e]
+  clean:
+    desc: Remove generated frontend build output only
+    cmds: ['node -e "require(''fs'').rmSync(''dist'',{recursive:true,force:true})"']

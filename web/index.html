@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Model workspace</title></head>
+<body>
+<header class="app-header">
+ <div class="header-context">
+  <h1 id="model-title">Model</h1>
+  <button id="toggle-text" aria-expanded="false" aria-controls="source-pane">Text</button>
+  <div class="header-spacer"></div>
+  <button id="view-actor" aria-haspopup="dialog" disabled>Viewing Alice ▾</button>
+  <button id="overflow" aria-label="More options" aria-haspopup="menu">···</button>
+ </div>
+ <nav id="demo-steps" class="demo-steps" aria-label="Seven-step demonstration">
+  <button id="reset" data-demo-step="1" aria-label="Reset" title="Restore the reference and fresh Alice/Bob environments" disabled><span>1</span> Reset</button>
+  <button data-demo-step="2" title="Alice changes pump.flowRate from 10 to 12 locally" disabled><span>2</span> Alice edits</button>
+  <button data-demo-step="3" title="Bob independently changes pump.flowRate from 10 to 15" disabled><span>3</span> Bob edits</button>
+  <button data-demo-step="4" title="Record and integrate Alice's change automatically" disabled><span>4</span> Alice publishes</button>
+  <button data-demo-step="5" title="Rebase Bob's change and expose the 10/12/15 conflict" disabled><span>5</span> Bob publishes</button>
+  <button data-demo-step="6" title="Bob adds alertEnabled = true while flowRate remains conflicted" disabled><span>6</span> Bob adds alert</button>
+  <button data-demo-step="7" title="Resolve flowRate to 14, preserve the later alert, and finish integration" disabled><span>7</span> Resolve</button>
+ </nav>
+ <p id="scenario-hint" class="scenario-hint" role="status" hidden></p>
+</header>
+<div id="error" role="alert" hidden></div>
+<div id="graph-state" class="graph-state" role="status" hidden>Loading diagram…</div>
+<main id="workbench">
+ <section id="source-pane" class="source-pane" aria-labelledby="source-heading" hidden>
+  <div class="pane-heading"><h2 id="source-heading">model.sysml</h2><button id="close-text" aria-label="Close source">Close</button></div>
+  <div id="source-editor"></div>
+  <div id="text-conflicts" class="text-conflicts"></div>
+ </section>
+ <div id="splitter" role="separator" tabindex="0" aria-label="Resize source pane" aria-orientation="vertical" aria-valuemin="25" aria-valuemax="70" aria-valuenow="46" hidden></div>
+ <section class="diagram-pane" aria-label="Block diagram">
+  <div id="canvas" tabindex="0" aria-label="Fixed block diagram viewport"><div id="diagram"></div><aside id="scenario-feedback" class="scenario-feedback" role="status" hidden><span id="scenario-message"></span><button id="dismiss-scenario" aria-label="Dismiss step result">Close</button></aside></div>
+  <div class="canvas-tools" aria-label="Diagram zoom"><button id="zoom-out" aria-label="Zoom out">−</button><span id="zoom">100%</span><button id="zoom-in" aria-label="Zoom in">+</button><button id="fit">Fit</button></div>
+ </section>
+</main>
+<section id="properties" class="local-popup" role="dialog" aria-label="Feature editor" hidden></section>
+<section id="proposal" class="local-popup" role="dialog" aria-label="Resolve feature conflict" hidden></section>
+<div id="view-menu" class="local-popup menu" role="dialog" aria-label="Viewing actor" hidden>
+ <button id="actor-alice" aria-pressed="true" disabled>Alice</button>
+ <button id="actor-bob" aria-pressed="false" disabled>Bob</button>
+</div>
+<div id="overflow-menu" class="local-popup menu" role="menu" aria-label="More options" hidden>
+ <button id="toggle-panel" role="menuitem" aria-haspopup="dialog" aria-expanded="false" aria-controls="collaboration">Changes and history</button>
+ <button id="open-diagnostics" role="menuitem">Diagnostics and recovery</button>
+ <button id="open-help" role="menuitem">Keyboard help</button>
+</div>
+<dialog id="collaboration" aria-labelledby="collaboration-heading">
+ <div class="dialog-heading"><h2 id="collaboration-heading">Changes</h2><button id="close-changes">Close Changes</button></div>
+ <div class="change-actions"><label class="field">Change description<input id="description" placeholder="Describe your change" autocomplete="off"></label><div class="action-buttons"><button id="record" class="primary" disabled>Record change</button><button id="share" disabled>Share draft</button><button id="deliver" disabled>Deliver</button><button id="update" disabled>Update</button></div><p class="meta">Record saves a local change. Share creates a review copy. Deliver publishes; Update brings accepted changes here.</p></div>
+ <div id="notice" role="status" class="notice"></div>
+ <button id="refresh-project">Refresh history and drafts</button><div id="collab-content"></div>
+</dialog>
+<dialog id="diagnostics-dialog" aria-labelledby="diagnostics-title"><div class="dialog-heading"><h2 id="diagnostics-title">Diagnostics and recovery</h2><button id="close-diagnostics">Close</button></div><p id="save-status" role="status">No workspace open</p><button id="retry" hidden>Retry save</button><button id="reload" title="Explicitly discard the buffer and reload from the service">Reload workspace</button><p id="source-version"></p><p id="analysis-status">No analysis</p><p id="wasm-status" role="status">Rust WASM starting</p><div id="diagnostics" class="diagnostics" role="region" aria-label="Source diagnostics"></div></dialog>
+<dialog id="definition-dialog" aria-labelledby="definition-title"><div class="dialog-heading"><h2 id="definition-title">Definition</h2><button id="close-definition">Close definition</button></div><div id="definition-content"></div></dialog>
+<dialog id="help-dialog" aria-labelledby="help-title"><div class="dialog-heading"><h2 id="help-title">Keyboard help</h2><button id="close-help">Close</button></div><p>Tab to a block or feature. Enter or F2 opens its editor. Shift+F10 opens actions. Escape closes an editor or dialog. Single-click selects; double-click edits. Use Text to edit the full source. Use Changes to record, share, deliver and update.</p></dialog>
+<dialog id="snapshot-dialog" aria-labelledby="snapshot-title"><div class="dialog-heading"><h2 id="snapshot-title">Read-only snapshot</h2><button id="close-snapshot">Close snapshot</button></div><p id="snapshot-meta"></p><pre id="snapshot-source" tabindex="0"></pre></dialog>
+<script type="module" src="/src/main.ts"></script>
+</body></html>

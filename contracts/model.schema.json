@@ -1,0 +1,837 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sysml-collab:model:v1",
+  "title": "SysML collaboration model contracts",
+  "description": "Reference definitions by name. Cross-field range/order and revision invariants are checked by consumers.",
+  "$defs": {
+    "SourceRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "SourceDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentId",
+        "version",
+        "text"
+      ],
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "ScalarValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "canonical"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "BOOLEAN",
+            "STRING",
+            "INTEGER",
+            "REAL"
+          ]
+        },
+        "canonical": {
+          "type": "string"
+        }
+      }
+    },
+    "PropertyValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "typeName",
+        "expression",
+        "scalar"
+      ],
+      "properties": {
+        "typeName": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expression": {
+          "type": "string"
+        },
+        "scalar": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ScalarValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "ownerId",
+        "name",
+        "value",
+        "valueRange",
+        "editable",
+        "readOnlyReason",
+        "declaredBy",
+        "definitionAttributeId",
+        "inherited"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PropertyValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "valueRange": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceRange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "editable": {
+          "type": "boolean"
+        },
+        "readOnlyReason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "declaredBy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "definitionAttributeId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inherited": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ModelElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "documentId",
+        "qualifiedName",
+        "name",
+        "kind",
+        "declarationRange",
+        "insertionOffset",
+        "attributes",
+        "typeName",
+        "definitionId",
+        "superTypeIds",
+        "ports",
+        "containerId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualifiedName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "declarationRange": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceRange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "insertionOffset": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Attribute"
+          }
+        },
+        "typeName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "definitionId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "superTypeIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Port"
+          }
+        },
+        "containerId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "severity",
+        "category",
+        "message",
+        "documentId",
+        "range"
+      ],
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": [
+            "ERROR",
+            "WARNING",
+            "INFO"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "range": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceRange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workspaceId",
+        "workspaceRevision",
+        "documentVersions",
+        "state",
+        "elements",
+        "diagnostics",
+        "connections"
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workspaceRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "documentVersions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "INVALID",
+            "PARTIAL"
+          ]
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ModelElement"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Connection"
+          }
+        }
+      }
+    },
+    "PropertyTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "elementId",
+        "attributeId"
+      ],
+      "properties": {
+        "elementId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attributeId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ConflictAlternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revisionId",
+        "actor",
+        "value"
+      ],
+      "properties": {
+        "revisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PropertyValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "originChangeId",
+        "target",
+        "kind",
+        "base",
+        "incoming",
+        "local"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originChangeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "$ref": "#/$defs/PropertyTarget"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "VALUE",
+            "ADDITION",
+            "SOURCE"
+          ]
+        },
+        "base": {
+          "$ref": "#/$defs/ConflictAlternative"
+        },
+        "incoming": {
+          "$ref": "#/$defs/ConflictAlternative"
+        },
+        "local": {
+          "$ref": "#/$defs/ConflictAlternative"
+        }
+      }
+    },
+    "AuthoredEdit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "documentId",
+        "target",
+        "attributeName",
+        "before",
+        "after"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SET_ATTRIBUTE",
+            "ADD_ATTRIBUTE"
+          ]
+        },
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "$ref": "#/$defs/PropertyTarget"
+        },
+        "attributeName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "before": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PropertyValue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after": {
+          "$ref": "#/$defs/PropertyValue"
+        }
+      }
+    },
+    "SourcePatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentId",
+        "expectedDocumentVersion",
+        "range",
+        "expectedText",
+        "replacementText"
+      ],
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectedDocumentVersion": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "range": {
+          "$ref": "#/$defs/SourceRange"
+        },
+        "expectedText": {
+          "type": "string"
+        },
+        "replacementText": {
+          "type": "string"
+        }
+      }
+    },
+    "Resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conflictId",
+        "originRevisionId",
+        "actor",
+        "value"
+      ],
+      "properties": {
+        "conflictId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originRevisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "$ref": "#/$defs/PropertyValue"
+        }
+      }
+    },
+    "ChangeRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changeId",
+        "revisionId",
+        "parentRevisionId",
+        "actor",
+        "description",
+        "edits",
+        "sourcePatches",
+        "conflicts",
+        "inheritedConflictIds",
+        "resolutions"
+      ],
+      "properties": {
+        "changeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parentRevisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "edits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AuthoredEdit"
+          }
+        },
+        "sourcePatches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourcePatch"
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Conflict"
+          }
+        },
+        "inheritedConflictIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "resolutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Resolution"
+          }
+        }
+      }
+    },
+    "WorkspaceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workspaceId",
+        "actor",
+        "revision",
+        "acceptedBaseRevision",
+        "documents",
+        "identities",
+        "draftTipRevision",
+        "analysis"
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "acceptedBaseRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceDocument"
+          }
+        },
+        "identities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "draftTipRevision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "analysis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Analysis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Port": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "ownerId",
+        "name",
+        "typeName",
+        "conjugated",
+        "inherited",
+        "declaredBy"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typeName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conjugated": {
+          "type": "boolean"
+        },
+        "inherited": {
+          "type": "boolean"
+        },
+        "declaredBy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Connection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "sourceElementId",
+        "sourcePortId",
+        "targetElementId",
+        "targetPortId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sourceElementId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourcePortId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetElementId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetPortId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

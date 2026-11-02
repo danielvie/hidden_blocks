@@ -1,0 +1,610 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sysml-collab:http:v1",
+  "title": "Local SysML application HTTP records",
+  "description": "Route ownership is documented in http-api.md. Consumers register model.schema.json by its $id before resolving these definitions.",
+  "$defs": {
+    "HistoryEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changeId",
+        "revisionId",
+        "parentRevisionId",
+        "actor",
+        "description",
+        "text",
+        "conflicts",
+        "inheritedConflictIds",
+        "accepted"
+      ],
+      "properties": {
+        "changeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parentRevisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:sysml-collab:model:v1#/$defs/Conflict"
+          }
+        },
+        "inheritedConflictIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "accepted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "WorkspaceState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workspaceId",
+        "actor",
+        "revision",
+        "acceptedBaseRevision",
+        "acceptedHead",
+        "source",
+        "analysis",
+        "lastValidAnalysis",
+        "conflicts",
+        "dirty",
+        "history"
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "acceptedBaseRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptedHead": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "urn:sysml-collab:model:v1#/$defs/SourceDocument"
+        },
+        "analysis": {
+          "$ref": "urn:sysml-collab:model:v1#/$defs/Analysis"
+        },
+        "lastValidAnalysis": {
+          "anyOf": [
+            {
+              "$ref": "urn:sysml-collab:model:v1#/$defs/Analysis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:sysml-collab:model:v1#/$defs/Conflict"
+          }
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/HistoryEntry"
+          }
+        }
+      }
+    },
+    "AcceptedEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revisionId",
+        "parentRevisionId",
+        "actor",
+        "description"
+      ],
+      "properties": {
+        "revisionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parentRevisionId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptedHead",
+        "acceptedHistory",
+        "workspaces",
+        "drafts",
+        "demo"
+      ],
+      "properties": {
+        "acceptedHead": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptedHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AcceptedEntry"
+          }
+        },
+        "workspaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "workspaceId",
+              "actor"
+            ],
+            "properties": {
+              "workspaceId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actor": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "drafts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "actor",
+              "description",
+              "conflictCount"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actor": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string"
+              },
+              "conflictCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            }
+          }
+        },
+        "demo": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DemoInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "message",
+        "state"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "ok",
+            "needs-resolution"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/WorkspaceState"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "message"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/WorkspaceState"
+        }
+      }
+    },
+    "SharedDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "actor",
+        "description",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/WorkspaceState"
+        }
+      }
+    },
+    "Create": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor"
+      ],
+      "properties": {
+        "actor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      }
+    },
+    "Save": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "documentVersion",
+        "text"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "documentVersion": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "Edit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "documentVersion",
+        "attributeId",
+        "expression"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "documentVersion": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "attributeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expression": {
+          "type": "string"
+        }
+      }
+    },
+    "Add": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "documentVersion",
+        "elementId",
+        "name",
+        "typeName",
+        "expression"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "documentVersion": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "elementId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typeName": {
+          "enum": [
+            "Real",
+            "Integer",
+            "Boolean",
+            "String"
+          ]
+        },
+        "expression": {
+          "type": "string"
+        }
+      }
+    },
+    "Record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "description"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "Deliver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "operationId"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "operationId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-]{1,80}$"
+        }
+      }
+    },
+    "Update": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "Resolve": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "originChangeId",
+        "conflictId",
+        "expression"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "originChangeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conflictId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expression": {
+          "type": "string"
+        }
+      }
+    },
+    "Share": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedRevision",
+        "operationId",
+        "description"
+      ],
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "operationId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-]{1,80}$"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "DemoInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "aliceWorkspaceId",
+        "bobWorkspaceId",
+        "lastResetOperation"
+      ],
+      "properties": {
+        "generation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliceWorkspaceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bobWorkspaceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lastResetOperation": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "DemoState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generation",
+        "alice",
+        "bob"
+      ],
+      "properties": {
+        "generation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alice": {
+          "$ref": "#/$defs/WorkspaceState"
+        },
+        "bob": {
+          "$ref": "#/$defs/WorkspaceState"
+        }
+      }
+    },
+    "DemoReset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedGeneration",
+        "operationId"
+      ],
+      "properties": {
+        "expectedGeneration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operationId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-]{1,80}$"
+        }
+      }
+    }
+  }
+}

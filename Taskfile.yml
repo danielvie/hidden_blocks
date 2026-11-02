@@ -1,0 +1,51 @@
+version: '3'
+
+tasks:
+  default:
+    desc: List available tasks
+    cmds: [task --list]
+  setup:
+    desc: Check the local toolchain and prepare the pinned official parser
+    cmds: ['node scripts/toolchain.mjs setup {{.CHECK_ONLY | default "0"}}']
+  run:
+    desc: Run the connected PoC with ready-made Alice and Bob environments
+    cmds: [node scripts/toolchain.mjs run]
+  run:example:
+    desc: Compatibility alias for the one PoC demo
+    cmds: [task run]
+  build:
+    desc: Build the Java backend, browser editor, and real WASM
+    cmds: [node scripts/toolchain.mjs build]
+  test:
+    desc: Run all unit, real-parser, recovery, and isolated browser tests
+    cmds: [node scripts/toolchain.mjs test]
+  test:toolchain:
+    desc: Verify safe cleanup and toolchain selection
+    cmds: [node --test scripts/toolchain.test.mjs scripts/runtime.test.mjs]
+  test:pilot-bootstrap:
+    desc: Verify pinned parser artifacts and run the offline real-parser probe
+    cmds: [node scripts/setup-pilot.mjs --self-test, node scripts/setup-pilot.mjs --check]
+  test:model-contracts:
+    desc: Verify shared model records and golden fixtures
+    cmds: [node scripts/toolchain.mjs contracts]
+  test:sysml-adapter:
+    desc: Test the real official SysML parser adapter
+    cmds: [node scripts/toolchain.mjs parser]
+  test:change-engine:
+    desc: Test the authoritative change engine
+    cmds: [node scripts/toolchain.mjs changes]
+  test:workspace-service:
+    desc: Test workspace persistence and publication
+    cmds: [node scripts/toolchain.mjs workspaces]
+  test:web-editor:
+    desc: Test the browser editor and WASM
+    cmds: [node scripts/toolchain.mjs web]
+  test:e2e:
+    desc: Test the complete two-person browser scenario
+    cmds: [node scripts/toolchain.mjs e2e]
+  lint:
+    desc: Check scripts, Java compilation, TypeScript, and Rust formatting
+    cmds: [node scripts/toolchain.mjs lint]
+  clear:
+    desc: Remove build outputs without deleting workspace data or history
+    cmds: [node scripts/toolchain.mjs clear]

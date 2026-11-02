@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.sysml -text
+*.kerml -text
+*.jar binary
+*.wasm binary

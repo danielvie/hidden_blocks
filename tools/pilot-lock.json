@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation",
+  "release": "2026-09.1",
+  "sourceCommit": "d81b2ad5016f2e2d3d4364b3d06d01d8bb12a896",
+  "firstCandidateCommit": "a9676a3c4825201b270b59289bf284154842bde1",
+  "selectionReason": "The official release archive contains the standalone shaded runtime and matching source libraries; the first candidate is four commits newer and is not the binary's source pin.",
+  "javaMajor": 21,
+  "archive": {
+    "url": "https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/releases/download/2026-09.1/jupyter-sysml-kernel-0.63.1.zip",
+    "file": "jupyter-sysml-kernel-0.63.1.zip",
+    "bytes": 126141158,
+    "sha256": "2ab938037b8d3a02a3518019b6e81b356a994f4a5214727bfedcfd64bad25415",
+    "digestSource": "https://api.github.com/repos/Systems-Modeling/SysML-v2-Pilot-Implementation/releases/tags/2026-09.1"
+  },
+  "runtimeDirectory": "runtime/2026-09.1",
+  "classpath": "sysml/jupyter-sysml-kernel-0.63.1-all.jar",
+  "libraries": "sysml/sysml.library",
+  "librarySourceCount": 94,
+  "provenance": {
+    "source": "https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/tree/d81b2ad5016f2e2d3d4364b3d06d01d8bb12a896",
+    "libraryComparison": "All 94 .kerml/.sysml files in the release archive were SHA256-compared byte-for-byte with sysml.library at sourceCommit; no differences.",
+    "sourceLicense": "EPL-2.0",
+    "standardLibraryLicense": "EPL-2.0, per official release README licensing section",
+    "dependencyLicenseReview": "The shaded distribution contains third-party components; complete redistribution review is pending."
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "0becf16567beb77fa252b7664631dd177c8f9a1889e48995b45379c7130e5303"
+    },
+    {
+      "path": "sysml/jupyter-sysml-kernel-0.63.1-all.jar",
+      "sha256": "67c914092f4520ba98548b285c5a9a8bc08f92a0aeec7b763e12a574e91f9ff7"
+    },
+    {
+      "path": "sysml/sysml.library/.index.json",
+      "sha256": "5b34393b1c3da1d0b978a1c6bbb01332498ce212eb9ea69fcdb899f12af3a18f"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Analysis/AnalysisTooling.sysml",
+      "sha256": "6f71246f2a3f71ebd88df71736d7dca89af0eac8a3e7db5ea7e7a1970a7f7fd6"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Analysis/SampledFunctions.sysml",
+      "sha256": "66f11d0475d46e5350dfaf0ecb3ee44018b1d5d279cba03aa04dd6a6a0a39e23"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Analysis/StateSpaceRepresentation.sysml",
+      "sha256": "389a50e3eaa384d4f8d823335dd8acdacbdd139c8053b34829bc559984629005"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Analysis/TradeStudies.sysml",
+      "sha256": "411d0b517d29218084683305770b360ac72fa068adefd9e67f2a4f0a52abcfdc"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Cause and Effect/CausationConnections.sysml",
+      "sha256": "ad96c5282470e30d859582560225a75091b7c8058c0b949608e9dd07c130b661"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Cause and Effect/CauseAndEffect.sysml",
+      "sha256": "a2d39ed3e61477fde0273473a2c46d8eeb93ed81fcfdaeac5d48b9f942ac5403"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Geometry/ShapeItems.sysml",
+      "sha256": "c9f2a10226e8d1a1280aee1ddb2d3e3ec5fe3a9c236c628a4330ee51e36f16a0"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Geometry/SpatialItems.sysml",
+      "sha256": "21f4b44f64212e7c4e5802b7d4deeaec26390fc7e4133be0793eee4f4d1c11aa"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Metadata/ImageMetadata.sysml",
+      "sha256": "b7fa6baf2ee3e3c0708c2b5901abd0d51deeba8e61652909cac57069b4e06731"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Metadata/ModelingMetadata.sysml",
+      "sha256": "bb6c664cfe65dc298827c6cca8fc21941965db3a40a0412ba211cf6ff1cc254d"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Metadata/ParametersOfInterestMetadata.sysml",
+      "sha256": "f5c6da3be824a82a34482f00a3e43976787c03ea1d30cbda84b1be838c557876"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Metadata/RiskMetadata.sysml",
+      "sha256": "ee4f0734fa5995f435ca9c6144f48e3b7a10d422372a71c4396bba2401c14a6e"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQ.sysml",
+      "sha256": "1114a2f3556e757676768d05de2fbf8b1804fde5892d68c976e111db81117fda"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQAcoustics.sysml",
+      "sha256": "91ff456731559717295f3ad27e93a9b88787a264f1fa895fd4efec9632182557"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQAtomicNuclear.sysml",
+      "sha256": "ffd8c8667874fd31e36102eeb239923ab08463316a7b228376da282b9ca3c5be"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQBase.sysml",
+      "sha256": "cc5dc730d2a7167e914431a6f12d0318f792a5c6e2a204a37df9ab33f5e98435"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQCharacteristicNumbers.sysml",
+      "sha256": "c35c40236af5dacc75f5a0882da4244d4bb8551ebe0c8df4218c9e302e75d64d"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQChemistryMolecular.sysml",
+      "sha256": "a6727de0079ffc45ccd020ba44e7202a9e59c4d148a9df8193037fee6da7711a"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQCondensedMatter.sysml",
+      "sha256": "a0896bd6adf713243bd0009b3f09ea451a3e31cb772622b05f89a5404c229984"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQElectromagnetism.sysml",
+      "sha256": "3517d4c9a31dc4e0fb4a6900d7a2c03d4dec3fba410fa04085bfb995adb2fae7"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQInformation.sysml",
+      "sha256": "7b9e1e1b55e9b46556f822451515a6918d24cf61b018b01757cdad18c6856604"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQLight.sysml",
+      "sha256": "a768a75b90bcae08d35662465331e96a7c785f4bf1df107663a2a6865604d643"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQMechanics.sysml",
+      "sha256": "eb60fe410815a67f24cddcef0e5562479fa1faea8347e7a7199478a6fc559c5b"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQSpaceTime.sysml",
+      "sha256": "47946e32f30110661ab586de2f851841d1fad0b35381e510c1eaabba039ecc39"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/ISQThermodynamics.sysml",
+      "sha256": "37ff9990c0b9485dd0e0c901be3bb979a62d22b4598b7b9007e746f4b24c8c3b"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/MeasurementRefCalculations.sysml",
+      "sha256": "51e15d389f3836df3782f87d6450a1d6a8ac08dfd9a2cfddef338ae56dd688dc"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/MeasurementReferences.sysml",
+      "sha256": "32d25b13e96487f771b293ab8e9ca82a39ccd8da6553d944900ba3b500323bb8"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/Quantities.sysml",
+      "sha256": "6e59653fe439e721f707e00bc25f3843b4973180194eaf5d826b7e283600cd45"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/QuantityCalculations.sysml",
+      "sha256": "64e533c978cb73b29f0315e513af49f7ae488c1aa3c712cbf9443d9e07d009b4"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/SI.sysml",
+      "sha256": "8fa533350656ac42f9ce3e9a4068ec1251d54e074af08109cdafc47ac0b24288"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/SIPrefixes.sysml",
+      "sha256": "90e604fcda40f8ec920114a457097cb2fed6d898d422c80277b4c8e9c3e70638"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/TensorCalculations.sysml",
+      "sha256": "bd58a683584fa725256d4687c9f6eb52c09fa17ea65e30d84c1313de1777b80c"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/Time.sysml",
+      "sha256": "1eb02033463c740d35705d03a2dd7d64686d88c110ed7a30ef01e02bdb2dca47"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/USCustomaryUnits.sysml",
+      "sha256": "aa5adac4685322aca75a9a144fbe5dc10f34ca4324e07393eb8ebfd324b34597"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Quantities and Units/VectorCalculations.sysml",
+      "sha256": "1cf01f4cbcb0d26b443cd9efd9276224f35b8e18d18f3741dbbace8cd1f257be"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Requirement Derivation/DerivationConnections.sysml",
+      "sha256": "40e8b13458c120bfa4f9a4059bfc4982ef959815e8580a6ac7f113bed36f55fc"
+    },
+    {
+      "path": "sysml/sysml.library/Domain Libraries/Requirement Derivation/RequirementDerivation.sysml",
+      "sha256": "ee5bed2b7ad17e5c7505e6761d164e14de3d041d97e4bffc005853a130e09a20"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "sha256": "6caea283ebdb11d0a960615276358abcdc99aaa12c2aa05b42a740e8a73688b1"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "sha256": "4db25ce00dd170fd67261f6e7e21a2616bda15d233579dc5fb3193aaf61fa5a5"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Data Type Library/VectorValues.kerml",
+      "sha256": "7b22f8867e1cf46ac6a8226175db4405f6c29f047b3d6ad54a044fef3ce683dc"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+      "sha256": "c7700f36c786ff25796eb37d321a7a85f5f67b785e08a548c1cf4cd207c8b27f"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/BooleanFunctions.kerml",
+      "sha256": "f836553db8e0ab1fb782043090198bdcd33ab6f168773e099fa2e192646ecc46"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "sha256": "c33e76c32d8370fefef123692a93d621f09a4cb944f08dd3543461f1f73c1505"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/ComplexFunctions.kerml",
+      "sha256": "cdb8ab38b5937f3716d66e2c71d6811d2ae7df08c1704f4dce7a815be1c01563"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "sha256": "bd95a74d3ab9f44cfb1445cbaee8c509d78018feaa1eb408f5d91a6ac969c1b1"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml",
+      "sha256": "896b81cd660948084efd0ee9ebc9125a1588b1e2d360bdebb03430d0317b7b5b"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "sha256": "3da7c23ee95290d768dae67e75287122d5512d054c0f9ca57b78a8aab81ee309"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/NaturalFunctions.kerml",
+      "sha256": "f83daf1bbcf124fb9c535273c3c536d08424031991013f2f6c563706afde92ae"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/NumericalFunctions.kerml",
+      "sha256": "ac1f12fc2880a2017a2d4caa6e8f839e0b6bc72b92b154a3db13b14fdd0caa93"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml",
+      "sha256": "4bba1f6ffd309568f12da186a3b10bcf43473be558d91d89cb38f9e1037cd12f"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/RationalFunctions.kerml",
+      "sha256": "a7ef0870a5282f5dc489ab85ef424b66cd8909f5f52b2efe5f14ed1765afc768"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/RealFunctions.kerml",
+      "sha256": "4b469aafc18d801ae733734066d3e43aa767c44a89e912cf60772933ab568a76"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "sha256": "3a6baf3962079a395304f0a811f3b58da09f18f91aaf76ceef5f81ebeae7a258"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "sha256": "927237bb8156b6e8c9a6c3444999d7da98b58af00d7d2a63c487c9260165265e"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/StringFunctions.kerml",
+      "sha256": "b3bbcad2251f9152f4b730754ad172e9a4e52d61fbdb9bdf55b968d92fcaa831"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/TrigFunctions.kerml",
+      "sha256": "04af7eb3aa5be68c60bab85097b870b3a2540e646079c642d44b6a47150b0ce1"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Function Library/VectorFunctions.kerml",
+      "sha256": "2e9fdcd13a0cdf5db5bcc2326975430ac75432dccd45893740464d9a01487661"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sha256": "56df84cda67f62c63d4e79e2786fc26046cfa361a958c4fcf0843d32a5707e09"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "sha256": "960ac0884935e308beea55c78ed11b6946c37a386eb7958ef2c913aa275ae4c7"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml",
+      "sha256": "31385be7dca94bd0538f011d5c8f7925626d54f96970769f0fdb28b2186a9a03"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml",
+      "sha256": "b6f9e5349c7c7f393591c0334c3bec86f1766b3e37209819179310c2f8fe1fb7"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "sha256": "8fdf4b7416e981c895cd74b75dc14b18091d13cbcaff7cdded6f9c23e2483d58"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sha256": "dcf3c002717cb91f8e16f1890fdf5526f4e178ada898a189621c7d0c24b5ddc0"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "sha256": "983dbd85a4b183d8859326ee512fc59d991fb98a115e009e72fad21d1f9d1685"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "sha256": "7e6b8a0a8f16a475e6c9290926c85defe9e3e1a1bf70df8ef137f4eec08733e6"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Observation.kerml",
+      "sha256": "6bc57a73c43af6f61201b6eb659024a9f08f974643eb5a101e068e3637761ee4"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "sha256": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "sha256": "fd965e184b300737a192530de0c800cdbee236cb6220612f370400da21dfb327"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/SpatialFrames.kerml",
+      "sha256": "2a7790ebc2afacbd64eb781567906921e38eff385c917be03b090b8289353de7"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml",
+      "sha256": "f02fb7e8de58f4304c95c575ee1bcb7d271d621ce8e336ce36ea80a4e956c3da"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+      "sha256": "6697453f40187076ebda9ee475f7f974321eb8b48b93622879fe6560fa14dcf5"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml",
+      "sha256": "31e01baf2dadd5507a81dff436acf38cbdc66abaffc2828705fe2b67e277126a"
+    },
+    {
+      "path": "sysml/sysml.library/Kernel Libraries/Kernel Semantic Library/Triggers.kerml",
+      "sha256": "124cad3625935e078d1363e6100ee12537ca9c51445a18108e056db8b4885609"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Actions.sysml",
+      "sha256": "ac36c9404cac347a2c12d4a0cb067b1a9cebcba6a1a1853eaa1f5b3fdeb15693"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Allocations.sysml",
+      "sha256": "0ad900a4c25d88eb96da3d57e365f6c38cd87019bcaac5ab91eee9523b5f0ed1"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/AnalysisCases.sysml",
+      "sha256": "2bb88f61178f2cefd5441600d2d980ed1e1a4ffc5cb7b3ca9207edee5c350f87"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Attributes.sysml",
+      "sha256": "0ff9b0acc3f0a7bd68fefe6b110e9136f1911d0c483741804c3b8ca07f5f538d"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Calculations.sysml",
+      "sha256": "19f5c2ac553c0a034550292de6bfa601e6948fc81d5af781b59c940eee2e5f72"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Cases.sysml",
+      "sha256": "2c4c0cbaaa466f9f720ba69af3a019517ca0a7741a561f7880006bae946bf24f"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Connections.sysml",
+      "sha256": "7303b68d46ee3115e26efbd22d209640cd0f81a71b4c0f0f46f011011153b1c6"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Constraints.sysml",
+      "sha256": "84dd65984abd0c35c37b75ef5766bfa63c836aa75a1c75a9d3eb5f4230fa8fdd"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Flows.sysml",
+      "sha256": "7a4c1c95af188cb617059dab4a38dc64ae058e3f99740f2e34e2be261dec2fd1"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Interfaces.sysml",
+      "sha256": "62b5c3c2bc3960e8d25633231c3933a81e422b3a904dc9541b8787113d076c66"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Items.sysml",
+      "sha256": "5a3b2c2d2eb3104186a5e200c40647d1d798685a62db0301ce4ca361651015b7"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Metadata.sysml",
+      "sha256": "c86a68a1b7f8f33f287d812780d2446021aeefb3284f28b9c10dfe2b1a13ded6"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Parts.sysml",
+      "sha256": "a22b926a7bbdcda20149200a61fd41c9f1e3924c8929ef7d68db529fb8e7bf51"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Ports.sysml",
+      "sha256": "febd6617c3bb9d0f93c77722b98874d89b4973f7b93ee88509097b2e80bc6995"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Requirements.sysml",
+      "sha256": "c436a8fe2959b380ee3d8ae7c1c206311aa9c1215d13800b215f9952e1216632"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/StandardViewDefinitions.sysml",
+      "sha256": "b29882b0240e3cc2721b66c6bc9fd1d2d2431a34e80e170cd465911ff8d833a5"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/States.sysml",
+      "sha256": "1a84e28d41a8d76ff1cbce81312257dac97b47bcd545c31f8a34f73098ac13bc"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/SysML.sysml",
+      "sha256": "9712ed6aec59e2ff31c915c58ec8d42158c415c9309e96532626f6ee5f8f159c"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/UseCases.sysml",
+      "sha256": "242e51944c32032215d76a9ff1fd967d8ba36efffd9d78da1c423a5b102a2cf6"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/VerificationCases.sysml",
+      "sha256": "dbee7255e16df9c5cf0bded96c43cb60b1e5026b6973c5fb1176316902ac47b9"
+    },
+    {
+      "path": "sysml/sysml.library/Systems Library/Views.sysml",
+      "sha256": "0bcf10afd49dd09c8c64844da97fc4c01a4a35fefd4e4a179a8bc0a8a261c8a8"
+    }
+  ]
+}
