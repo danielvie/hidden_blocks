@@ -87,6 +87,7 @@ Scalar edits/additions are supported. Topology editing, general structural merge
 ## Documents
 
 - [Demo walkthrough](docs/demo.md)
+- [Illustrated walkthrough](docs/illustrated-walkthrough.md)
 - [Verification](docs/verification.md)
 - [PoC reset/actor contract](contracts/poc-demo.md)
 - [Build details](docs/build.md)
