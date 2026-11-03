@@ -1,5 +1,5 @@
 import {el,button,field,input,select} from './dom';
-import {conflictFor,definitionFor,attributeSourceRange,polylinePath,polylineMidpoint,blockColors,visibleProperties,shortName} from './model-view';
+import {conflictFor,cardConflictIds,definitionFor,attributeSourceRange,polylinePath,polylineMidpoint,blockColors,visibleProperties,shortName} from './model-view';
 import {openPopup,closePopup} from './popup';
 import type {Card,Projection,Attribute,Conflict,ModelElement,Connection,Point,RoutingRequest,RoutingResult} from './types';
 interface Actions { edit:(a:Attribute,expression:string)=>void; add:(e:ModelElement,name:string,typeName:string,expression:string)=>void; resolve:(c:Conflict,proposal?:string)=>void; select:(a:Attribute)=>void; definition:(e:ModelElement)=>void; source:(range:ModelElement['declarationRange'])=>void }
@@ -43,12 +43,13 @@ export class Diagram {
  }
  private choose(card:Card,a?:Attribute){this.selected=a?.id??card.element.id;this.selectAt(this.selected);if(a)this.actions.select(a);}
  private card(card:Card):HTMLElement {
-  const article=el('article','block');article.dataset.elementId=card.element.id;article.setAttribute('aria-label',card.element.name+' block');article.tabIndex=0;
+  const conflictIds=cardConflictIds(card,this.conflicts);
+  const article=el('article','block'+(conflictIds.length?' conflicted':''));article.dataset.elementId=card.element.id;article.setAttribute('aria-label',card.element.name+' block');article.tabIndex=0;
   article.style.left=card.position.x+'px';article.style.top=card.position.y+'px';
   const header=el('div','block-header');header.append(el('small','block-kind',card.element.kind==='PartUsage'?'«part»':'«part def»'),el('h3','',card.element.name+(card.element.typeName?' : '+shortName(card.element.typeName):'')));
   const definition=this.elements.find(e=>e.id===card.element.definitionId)??card.element;
   for(const id of definition.superTypeIds??[]){const base=this.elements.find(e=>e.id===id);if(base)header.append(button(':> '+base.name,()=>{closePopup(false);this.actions.definition(base);},'specialization'));}
-  if(card.conflicted){const count=card.properties.filter(p=>p.conflictId).length;const badge=el('span','conflict-badge',String(count));badge.setAttribute('aria-label',count+' unresolved feature conflicts');header.append(badge);}
+  if(conflictIds.length){const count=conflictIds.length;const badge=el('span','conflict-badge',String(count));badge.setAttribute('aria-label',count+' unresolved feature conflicts');header.append(badge);}
   article.append(header);
   const list=el('div','block-properties');const collapsed=card.properties.length>6&&!this.expanded.has(card.element.id);
   for(const property of visibleProperties(card.properties,!collapsed)){

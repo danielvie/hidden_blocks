@@ -10,6 +10,10 @@ export function diagramScope(elements:ModelElement[]) {
 export function conflictFor(attribute:Attribute,conflicts:Conflict[]) {
  return conflicts.find(c=>c.target.attributeId===attribute.id||!!attribute.definitionAttributeId&&c.target.attributeId===attribute.definitionAttributeId);
 }
+export function cardConflictIds(card:Card,conflicts:Conflict[]) {
+ const ids=card.properties.flatMap(p=>p.conflictId?[p.conflictId]:[]);
+ return [...new Set([...ids,...conflicts.filter(c=>c.target.elementId===card.element.id).map(c=>c.id)])];
+}
 export function definitionFor(element:ModelElement,attribute:Pick<Attribute,'declaredBy'>|undefined,elements:ModelElement[]) {
  if(attribute?.declaredBy)return elements.find(e=>e.id===attribute.declaredBy||e.qualifiedName===attribute.declaredBy||e.name===attribute.declaredBy);
  return elements.find(e=>e.id===element.definitionId)??element;

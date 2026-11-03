@@ -54,13 +54,13 @@ In the definition dialog, click **Show definition in source**. The source pane o
 
    ![Alice’s separate session before publishing](screenshots/walkthrough/07-alice-second-session.jpg)
 
-3. Return to Bob’s tab and click **5 Bob publishes**. The conflict marks `flowRate`; the shared model remains at Alice’s `12` until resolution. Click the conflicted row to inspect base `10`, incoming `12`, and Bob’s provisional `15`; choose **Cancel proposal** to continue the scripted sequence.
+3. Return to Bob’s tab and click **5 Bob publishes**. The pump block gets a red border and its `flowRate` row is marked as conflicted; the shared model remains at Alice’s `12` until resolution. A selected block also keeps its blue selection outline. Click the conflicted row to inspect base `10`, incoming `12`, and Bob’s provisional `15`; choose **Cancel proposal** to continue the scripted sequence.
 
    ![Bob’s conflicting publication](screenshots/walkthrough/08-conflict.jpg)
 
    ![Conflict alternatives](screenshots/walkthrough/09-conflict-details.jpg)
 
-4. Click **6 Bob adds alert**. This adds the scalar `alertEnabled = true` while the conflict remains. Then click **7 Resolve**. The shortcut resolves `flowRate` to `14`, publishes Bob’s changes, and preserves the later alert.
+4. Click **6 Bob adds alert**. This adds the scalar `alertEnabled = true` while the conflict remains. Then click **7 Resolve**. The shortcut resolves `flowRate` to `14`, publishes Bob’s changes, and preserves the later alert. Once resolved, the red border disappears.
 
    ![Bob adds a later alert while the conflict remains](screenshots/walkthrough/10-later-alert.jpg)
 

@@ -1,6 +1,6 @@
 import {describe,it,expect} from 'vitest';
-import {diagramScope,conflictFor,definitionFor,attributeSourceRange,analysisConnections,polylinePath,polylineMidpoint,visibleProperties} from './model-view';
-import type {ModelElement,Attribute,Conflict} from './types';
+import {diagramScope,conflictFor,cardConflictIds,definitionFor,attributeSourceRange,analysisConnections,polylinePath,polylineMidpoint,visibleProperties} from './model-view';
+import type {ModelElement,Attribute,Conflict,Card} from './types';
 const element=(id:string,kind='PartDefinition',extra:Partial<ModelElement>={}):ModelElement=>({id,name:id,kind,qualifiedName:'Example::'+id,documentId:'model.sysml',declarationRange:null,insertionOffset:null,attributes:[],...extra});
 describe('diagram model scope and legacy contracts',()=>{
  it('shows child usages, not their definitions or containing system',()=>{
@@ -17,6 +17,18 @@ describe('diagram model scope and legacy contracts',()=>{
   const base=element('VariableSpeedPump');base.attributes=[{id:'base-speed',valueRange:{start:25,end:29}} as Attribute];expect(definitionFor(element('pump','PartUsage'),row,[base])).toBe(base);
   expect(attributeSourceRange(row,[base])).toEqual({start:25,end:29});
   expect(attributeSourceRange({...row,valueRange:{start:40,end:42}},[base])).toEqual({start:40,end:42});
+ });
+ it('maps all targeted conflict kinds to their blocks and preserves inherited conflicts',()=>{
+  const card={element:element('pump'),properties:[{attribute:{id:'inherited'} as Attribute,changed:false,conflictId:'inherited-conflict'}]} as Card;
+  const conflicts=[
+   {id:'inherited-conflict',kind:'VALUE',target:{elementId:'base',attributeId:'base-flow'}},
+   {id:'add-conflict',kind:'ADDITION',target:{elementId:'pump',attributeId:'missing-addition'}},
+   {id:'source-conflict',kind:'SOURCE',target:{elementId:'pump',attributeId:'missing-source'}},
+   {id:'other-conflict',kind:'VALUE',target:{elementId:'tank',attributeId:'tank-flow'}},
+  ] as Conflict[];
+  expect(cardConflictIds(card,conflicts)).toEqual(['inherited-conflict','add-conflict','source-conflict']);
+  expect(cardConflictIds({...card,element:element('other'),properties:[]},conflicts)).toEqual([]);
+  expect(cardConflictIds({...card,properties:[{...card.properties[0],conflictId:'add-conflict'}]},conflicts)).toEqual(['add-conflict','source-conflict']);
  });
  it('keeps inherited features and every conflict visible when later additions fill a card',()=>{
   const properties=Array.from({length:9},(_,i)=>({attribute:{id:String(i),inherited:i===8} as Attribute,changed:false,conflictId:i===7?'conflict':null}));

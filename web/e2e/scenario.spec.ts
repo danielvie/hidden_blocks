@@ -28,6 +28,10 @@ for(const resolver of ['Bob','Alice'] as const){
   await runStep(page,3);await expect(flowValue(page)).toHaveText('15');await expect(page.locator('#view-actor')).toContainText('Bob');
   await runStep(page,4);await expect(flowValue(page)).toHaveText('12');await expect(page.locator('#view-actor')).toContainText('Alice');
   await runStep(page,5);await expect(flowRow(page)).toHaveClass(/has-conflict/);await expect(step(page,5)).toHaveClass(/step-conflict/);
+  await expect(pumpBlock(page)).toHaveClass(/conflicted/);await expect(pumpBlock(page)).toHaveCSS('border-top-color','rgb(180, 35, 24)');
+  await expect(page.locator('.block:not(.conflicted)')).toHaveCount(2);
+  await pumpBlock(page).locator('h3').click();await expect(pumpBlock(page)).toHaveClass(/selected/);
+  await pumpBlock(page).hover();await expect(pumpBlock(page)).toHaveCSS('border-top-color','rgb(180, 35, 24)');await expect(pumpBlock(page)).toHaveCSS('outline-color','rgb(37, 99, 235)');
   const conflicted=await (await page.request.get('/api/demo')).json();
   expect(conflicted.bob.conflicts[0].base.value.scalar.canonical).toBe('10');
   expect(conflicted.bob.conflicts[0].incoming.value.scalar.canonical).toBe('12');
@@ -39,6 +43,8 @@ for(const resolver of ['Bob','Alice'] as const){
   await page.reload();await expect(step(page,7)).toBeEnabled();await expect(pumpBlock(page)).toContainText('alertEnabled');
   if(resolver==='Alice')await chooseActor(page,'Alice');
   await runStep(page,7);await expect(flowValue(page)).toHaveText('14');await expect(flowRow(page)).not.toHaveClass(/has-conflict/);
+  await expect(pumpBlock(page)).not.toHaveClass(/conflicted/);await expect(pumpBlock(page)).toHaveCSS('border-top-color','rgb(170, 165, 134)');
+  await pumpBlock(page).locator('h3').click();await expect(pumpBlock(page)).toHaveClass(/selected/);await expect(pumpBlock(page)).toHaveCSS('outline-color','rgb(37, 99, 235)');
   await expect(page.locator('#scenario-feedback')).toContainText(/alertEnabled.*preserved/i);
   await expect(page.locator('#scenario-feedback')).toContainText(resolver);
   await expect(page.locator('#view-actor')).toContainText(resolver);

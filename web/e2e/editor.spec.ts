@@ -38,7 +38,7 @@ for(const mode of ['text-first','diagram-first'] as const){
   await openChanges(alice);await expect(alice.locator('.accepted-history').getByText('Deliver Alice changes',{exact:true}).first()).toBeVisible();await closeChanges(alice);
   if(mode==='text-first')await literal(bob,bobValue);else await editText(bob,replaceFlow(await savedText(bob),bobValue));
   await record(bob,'Bob flow');await operation(bob,'Deliver');
-  await expect(flowRow(bob)).toHaveClass(/has-conflict/);await expect(pumpBlock(bob)).not.toHaveClass(/conflicted/);await expect(pumpBlock(bob).locator('.conflict-badge')).toHaveText('1');
+  await expect(flowRow(bob)).toHaveClass(/has-conflict/);await expect(pumpBlock(bob)).toHaveClass(/conflicted/);await expect(pumpBlock(bob).locator('.conflict-badge')).toHaveText('1');
   await openText(bob);await flowRow(bob).click();await expect(bob.locator('#proposal')).toBeVisible();await bob.locator('#proposal').getByRole('button',{name:'Show in source',exact:true}).click();
   await expect(source(bob)).toBeFocused();await expect.poll(()=>bob.evaluate(()=>window.getSelection()?.toString())).toBe(bobValue);await bob.keyboard.insertText('14');
   await expect(bob.locator('#proposal').getByLabel('Custom expression')).toHaveValue('14');await expect(flowValue(bob)).toHaveText(bobValue);await bob.getByRole('button',{name:'Cancel proposal'}).click();
